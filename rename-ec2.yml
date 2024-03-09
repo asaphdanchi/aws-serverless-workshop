@@ -15,7 +15,7 @@ def create_tags(instanceids):
         Tags=[
             {
                 'Key': 'Company',
-                'Value': 'JJTech'
+                'Value': 'Solavise'
             },
             {
                 'Key': 'Name',
