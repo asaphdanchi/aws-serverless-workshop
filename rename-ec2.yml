@@ -1,0 +1,30 @@
+import boto3
+
+
+def get_instances():
+    instance_id=[]
+    resource = boto3.resource('ec2')
+    for i in resource.instances.all():
+        instance_id.append(i.id)
+    return instance_id
+
+def create_tags(instanceids):
+    client = boto3.client('ec2')
+    response = client.create_tags(
+        Resources=instanceids,
+        Tags=[
+            {
+                'Key': 'Company',
+                'Value': 'JJTech'
+            },
+            {
+                'Key': 'Name',
+                'Value': 'TestInstancesBoto3'
+            },
+        ]
+    )
+
+def lambda_handler(event, context):
+    instanceids=get_instances()
+    print(instanceids)
+    create_tags(instanceids)
